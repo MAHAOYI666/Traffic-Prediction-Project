@@ -11,7 +11,7 @@ from src import utils
 from src.data_processing import load_data, DataPreprocessor, create_sequences, TimeSeriesDataset
 from torch.utils.data import DataLoader
 from src.models.cnn_transformer import CNNTransformerModel
-
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 # 注意：此脚本中的数据加载和评估逻辑是为Optuna特别定制的，
 # 与主训练流程略有不同（例如，包含验证集）。
@@ -127,4 +127,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
