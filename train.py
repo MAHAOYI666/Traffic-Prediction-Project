@@ -81,11 +81,13 @@ def main():
     utils.analyze_efficiency(
         model,
         config.DEVICE,
-        lookback=model_params['lookback'],
-        batch_size=config.BATCH_SIZE,
-        beta=model_params['beta']  # 传入beta参数
+        model_params['lookback'],
+        1,  # feature_size
+        config.BATCH_SIZE,
+        model_params['beta']  # beta 作为最后一个位置参数
     )
 
 
 if __name__ == "__main__":
+
     main()
