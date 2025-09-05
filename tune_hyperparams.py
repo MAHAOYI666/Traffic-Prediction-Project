@@ -5,7 +5,6 @@ import torch
 import torch.nn as nn
 import numpy as np
 
-# 导入重构后的模块
 from src import config
 from src import utils
 from src.data_processing import load_data, DataPreprocessor, create_sequences, TimeSeriesDataset
@@ -129,3 +128,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
