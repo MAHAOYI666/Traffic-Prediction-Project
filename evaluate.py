@@ -3,7 +3,6 @@
 import torch
 import os
 
-# 导入重构后的模块
 from src import config
 from src import utils
 from src import data_processing
@@ -20,7 +19,7 @@ def main():
     model_params = config.OURS_MODEL_PARAMS
     print(f"开始评估已保存的模型: {model_name}")
 
-    # 2. 加载数据 (必须使用与训练时完全相同的参数)
+    # 2. 加载数据 (使用与训练时完全相同的参数)
     _, test_loader, preprocessor, y_test_normalized = data_processing.get_dataloaders(
         config, model_params['lookback']
     )
@@ -35,7 +34,7 @@ def main():
     ).to(config.DEVICE)
 
     # 4. 实例化Trainer并加载模型权重
-    # 注意: optimizer和criterion在此处为None，因为我们只进行评估
+    # 只进行评估，optimizer和criterion在此处为None
     eval_trainer = Trainer(model, None, None, config.DEVICE, preprocessor, model_params)
     eval_trainer.load_model(model_name)
 
@@ -69,3 +68,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
