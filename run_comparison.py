@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.neighbors import KNeighborsRegressor
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 # 导入重构后的模块
 from src import config
@@ -130,4 +131,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
