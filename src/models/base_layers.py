@@ -5,7 +5,7 @@ import torch.nn as nn
 import numpy as np
 
 class PositionalEncoding(nn.Module):
-    """Positional Encoding层，直接来自您的脚本。"""
+    """Positional Encoding层。"""
     def __init__(self, d_model, max_len=5000):
         super(PositionalEncoding, self).__init__()
         pe = torch.zeros(max_len, d_model)
@@ -20,4 +20,5 @@ class PositionalEncoding(nn.Module):
         self.register_buffer('pe', pe)
 
     def forward(self, x):
+
         return x + self.pe[:, :x.size(1)]
