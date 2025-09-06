@@ -10,7 +10,6 @@ from matplotlib import rcParams
 
 
 def set_seed(seed=42):
-    """设置随机种子以确保结果可复现。"""
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -42,7 +41,6 @@ def setup_plotting_style(font_size=35, font_family='Times New Roman'):
 def plot_predictions(actuals, predictions, title, save_path, scale_factor=1e7, font_size=35):
     """
     绘制并保存真实值与预测值的对比图。
-    该函数复现了您多个脚本中的绘图逻辑。
     """
     plt.figure(figsize=(12, 8))
     plt.plot(actuals / scale_factor, label='True Values')
@@ -77,7 +75,6 @@ def plot_loss_curve(loss_history, title, save_path):
 def analyze_efficiency(model, device, lookback, feature_size=1, batch_size=64, *model_fwd_args):
     """
     对给定的PyTorch模型进行全面的计算效率分析 (通用版)。
-    该函数直接来自您提供的 utils.py。
     """
     print("\n" + "=" * 50)
     # 尝试获取model.model_type，如果不存在则使用类名
@@ -133,5 +130,6 @@ def analyze_efficiency(model, device, lookback, feature_size=1, batch_size=64, *
         throughput = batch_size / avg_batch_latency_s
         print(f"[3.2] 批处理延迟 ({batch_size}个样本/批): {avg_batch_latency_s * 1000:.3f} ms/batch")
         print(f"[3.3] 模型吞吐量: {throughput:.2f} samples/sec")
+
 
     print("=" * 50 + "\n")
