@@ -7,7 +7,7 @@ from .base_layers import PositionalEncoding
 
 class CNNTransformerModel(nn.Module):
     """
-    CNN-Transformer模型，根据审稿人建议修改的版本。
+    CNN-Transformer模型。
     """
 
     def __init__(self, feature_size=1, num_layers=3, d_model=128, num_heads=8, dim_feedforward=256, kernel_size=3):
@@ -61,3 +61,4 @@ class CNNTransformerModel(nn.Module):
 
 
         return combined_output
+
