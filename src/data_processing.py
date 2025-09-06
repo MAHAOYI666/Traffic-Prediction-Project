@@ -90,7 +90,8 @@ def create_sequences(data_values, lookback):
 
 class TimeSeriesDataset(Dataset):
     """自定义PyTorch数据集。"""
-
+    """PyTorch数据集标准形式。"""
+    
     def __init__(self, X, y):
         self.X = torch.tensor(X, dtype=torch.float32)
         self.y = torch.tensor(y, dtype=torch.float32)
@@ -131,5 +132,6 @@ def get_dataloaders(config, lookback):
     test_loader = DataLoader(test_dataset, batch_size=config.BATCH_SIZE, shuffle=False)
 
     print(f"数据加载完成。训练集样本数: {len(train_dataset)}, 测试集样本数: {len(test_dataset)}")
+
 
     return train_loader, test_loader, preprocessor, y_test  # 返回y_test用于后续逆变换真实值
