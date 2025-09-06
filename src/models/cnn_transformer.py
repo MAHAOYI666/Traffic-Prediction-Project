@@ -8,7 +8,6 @@ from .base_layers import PositionalEncoding
 class CNNTransformerModel(nn.Module):
     """
     CNN-Transformer模型，根据审稿人建议修改的版本。
-    (使用LayerNorm, 禁用Dropout)
     """
 
     def __init__(self, feature_size=1, num_layers=3, d_model=128, num_heads=8, dim_feedforward=256, kernel_size=3):
@@ -59,5 +58,6 @@ class CNNTransformerModel(nn.Module):
         # 加权组合
         combined_output = beta * output_cnn + (1 - beta) * output_transformer
         combined_output = self.softplus(combined_output)
+
 
         return combined_output
