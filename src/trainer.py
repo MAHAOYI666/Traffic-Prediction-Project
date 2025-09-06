@@ -9,7 +9,7 @@ import numpy as np
 
 from . import config
 from . import utils
-from .models.cnn_transformer import CNNTransformerModel  # 用于特殊处理beta参数
+from .models.cnn_transformer import CNNTransformerModel  # 特殊处理beta参数
 
 
 class Trainer:
@@ -21,28 +21,26 @@ class Trainer:
     def __init__(self, model, optimizer, criterion, device, preprocessor, model_params):
         """
         初始化Trainer。
-
-        Args:
             model (torch.nn.Module): 要训练的模型。
             optimizer (torch.optim.Optimizer): 优化器。
             criterion (torch.nn.Module): 损失函数。
             device (torch.device): 训练设备 (CPU/GPU)。
             preprocessor (DataPreprocessor): 数据预处理器，用于逆变换评估指标。
-            model_params (dict): 模型的超参数，可能包含beta等特定参数。
+            model_params (dict): 模型的超参数
         """
         self.model = model
         self.optimizer = optimizer
         self.criterion = criterion
         self.device = device
         self.preprocessor = preprocessor
-        self.model_params = model_params  # 存储模型的特定参数，例如CNN-Transformer的beta
+        self.model_params = model_params  # 存储模型的特定参数
 
         self.best_model_state = None
         self.best_loss = float('inf')
         self.train_losses_history = []
         self.epochs_no_improve = 0
 
-        # 加载绘图风格
+        # 绘图风格
         utils.setup_plotting_style(config.FONT_SIZE, config.FONT_FAMILY)
 
     def _get_model_forward_args(self, is_eval=False):
@@ -78,10 +76,8 @@ class Trainer:
     def train(self, train_loader, scheduler=None):
         """
         执行完整的训练过程，包含早停和学习率调度。
-
-        Args:
             train_loader (DataLoader): 训练数据加载器。
-            scheduler (torch.optim.lr_scheduler._LRScheduler, optional): 学习率调度器。默认为None。
+            scheduler (torch.optim.lr_scheduler._LRScheduler, optional): 学习率调度器。
         """
         print(f"开始训练模型: {getattr(self.model, 'model_type', self.model.__class__.__name__)}...")
         print(f"训练设备: {self.device}")
@@ -93,14 +89,13 @@ class Trainer:
             print(f"Epoch {epoch}/{config.NUM_EPOCHS}, 训练损失: {train_loss:.6f}")
 
             if scheduler:
-                scheduler.step(train_loss)  # 通常scheduler基于验证损失，这里简化为基于训练损失
+                scheduler.step(train_loss)  
 
-            # 早停逻辑 (基于训练损失进行简化，因为没有单独的验证集训练循环)
+            # 早停逻辑
             if train_loss < self.best_loss:
                 self.best_loss = train_loss
                 self.best_model_state = copy.deepcopy(self.model.state_dict())
                 self.epochs_no_improve = 0
-                # print("模型性能提升，已保存最佳状态。")
             else:
                 self.epochs_no_improve += 1
                 if self.epochs_no_improve >= config.PATIENCE:
@@ -117,8 +112,6 @@ class Trainer:
     def evaluate(self, test_loader, actuals_original_true_values=None):
         """
         在测试集上评估模型，并返回预测值、真实值和各项评估指标。
-
-        Args:
             test_loader (DataLoader): 测试数据加载器。
             actuals_original_true_values (np.ndarray, optional): 原始尺度的真实值，用于评估。
                                                                 如果提供，则使用此值，否则从preprocessor逆变换。
@@ -193,4 +186,5 @@ class Trainer:
             self.model.eval()
             print(f"模型已从 {file_path} 加载。")
         else:
+
             print(f"警告: 未找到模型文件 {file_path}。")
