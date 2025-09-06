@@ -72,7 +72,7 @@ def plot_loss_curve(loss_history, title, save_path):
     print(f"损失曲线图已保存至: {save_path}")
 
 
-def analyze_efficiency(model, device, lookback, feature_size=1, batch_size=64, *model_fwd_args):
+def analyze_efficiency(model, device, lookback, feature_size=1, batch_size=64, *model_fwd_args):# 可变位置参数
     """
     对给定的PyTorch模型进行全面的计算效率分析 (通用版)。
     """
@@ -133,3 +133,4 @@ def analyze_efficiency(model, device, lookback, feature_size=1, batch_size=64, *
 
 
     print("=" * 50 + "\n")
+
