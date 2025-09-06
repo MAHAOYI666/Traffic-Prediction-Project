@@ -28,8 +28,6 @@ PLOT_SCALE_FACTOR = 1e7  # 绘图时的y轴缩放因子
 
 # --- 5. 模型超参数 ---
 
-# 您的核心模型 (CNN-Transformer, 审稿人建议版)
-# 这些参数来自于您的 '审稿人建议模型.py' 和 '审稿人模型-搜索.py'
 OURS_MODEL_PARAMS = {
     'lookback': 95,
     'num_layers': 3,
@@ -52,7 +50,7 @@ BILSTM_PARAMS = {
     'loss_delta': 0.5
 }
 
-# 基线模型通用参数 (来自 '包含LSTM的多模型处理和绘图.py')
+# 基线模型通用参数 
 BASELINES_PARAMS = {
     'lookback': 90,
     'loss_delta': 1.0,
@@ -71,4 +69,5 @@ BASELINES_PARAMS = {
     'transformer_num_heads': 8,
     'transformer_dim_feedforward': 256,
     'transformer_weight_decay': 0.0001333
+
 }
